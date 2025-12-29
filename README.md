@@ -14,35 +14,26 @@ Cross-platform NordVPN library and command-line tool for .NET.
 ```csharp
 using NordSharp;
 
-// Initialize with specific countries
-var settings = NordVpn.Initialize(VpnOptions.ForCountries("United States", "Germany", "France"));
+// Quick connect - simplest usage
+var result = NordVpn.Rotate();
+Console.WriteLine($"New IP: {result.NewIp}");
 
-// Or use complete rotation (fetches all 4000+ servers)
+// Or with specific countries
+var settings = NordVpn.Initialize(VpnOptions.ForCountries("United States", "Germany", "France"));
+var result = NordVpn.Rotate(settings);
+
+// Or complete rotation (fetches all 4000+ servers)
 var settings = NordVpn.Initialize(VpnOptions.ForCompleteRotation());
 
-// Or quick connect
-var settings = NordVpn.Initialize(VpnOptions.ForQuickConnect());
-
-// Rotate to a new server (thread-safe)
-var result = NordVpn.Rotate(settings);
-if (result.Success)
-{
-    Console.WriteLine($"Connected to {result.Server}");
-    Console.WriteLine($"New IP: {result.NewIp}");
-}
-
 // Disconnect
-NordVpn.Terminate(settings);
-
-// Save/load settings
-NordVpn.SaveSettings(settings, "settings.ini");
-var loaded = NordVpn.LoadSettings("settings.ini");
+NordVpn.Terminate();
 
 // Get current IP
 var ip = NordVpn.GetCurrentIp();
 
-// Fetch all servers
-var servers = NordVpn.FetchServers();
+// Save/load settings for reuse
+NordVpn.SaveSettings(settings, "settings.ini");
+var loaded = NordVpn.LoadSettings("settings.ini");
 ```
 
 ## CLI Usage
@@ -90,9 +81,11 @@ dotnet publish -c Release -r win-x64 -p:PublishAot=true
 
 | Method | Description |
 |--------|-------------|
+| `Rotate()` | Quick connect to best server |
+| `Rotate(VpnSettings)` | Connect using specific settings |
+| `RotateAsync(CancellationToken)` | Async quick connect |
+| `RotateAsync(VpnSettings, CancellationToken)` | Async connect with settings |
 | `Initialize(VpnOptions?)` | Sets up VPN with the specified options |
-| `Rotate(VpnSettings)` | Connects to a random server from configured list |
-| `RotateAsync(VpnSettings, CancellationToken)` | Async version of Rotate |
 | `Terminate(VpnSettings?)` | Disconnects from VPN |
 | `GetCurrentIp()` | Returns current public IP address |
 | `FetchServers()` | Fetches all servers from NordVPN API |

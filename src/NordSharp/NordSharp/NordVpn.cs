@@ -137,6 +137,17 @@ public static class NordVpn
     }
 
     /// <summary>
+    /// Rotates to a new VPN server using quick connect. Thread-safe.
+    /// </summary>
+    public static VpnConnectionResult Rotate() => Rotate(Initialize());
+
+    /// <summary>
+    /// Rotates to a new VPN server asynchronously using quick connect. Thread-safe.
+    /// </summary>
+    public static Task<VpnConnectionResult> RotateAsync(CancellationToken cancellationToken = default) 
+        => RotateAsync(Initialize(), cancellationToken);
+
+    /// <summary>
     /// Rotates to a new VPN server. Thread-safe - only one rotation can occur at a time.
     /// </summary>
     /// <param name="settings">Settings from Initialize().</param>
