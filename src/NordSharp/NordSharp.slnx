@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="NordSharp.Cli/NordSharp.Cli.csproj" />
+  <Project Path="NordSharp/NordSharp.csproj" />
+</Solution>
