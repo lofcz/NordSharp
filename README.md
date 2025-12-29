@@ -1,3 +1,6 @@
+[![NordSharp](https://shields.io/nuget/v/NordSharp?v=302&icon=nuget&label=NordSharp)](https://www.nuget.org/packages/NordSharp)
+[![License:MIT](https://img.shields.io/badge/License-MIT-34D058.svg)](https://opensource.org/license/mit)
+
 # NordSharp
 
 Cross-platform NordVPN library and command-line tool for .NET.
@@ -10,6 +13,14 @@ Cross-platform NordVPN library and command-line tool for .NET.
 - **Full API support**: Connects to NordVPN API to fetch server list
 
 ## Library Usage
+
+Install the library:
+
+```
+dotnet add package NordSharp
+```
+
+Use the static `NordVpn` class:
 
 ```csharp
 using NordSharp;
