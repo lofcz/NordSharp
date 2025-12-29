@@ -15,19 +15,8 @@ public static class NordVpn
 {
     private static readonly SemaphoreSlim RotateLock = new SemaphoreSlim(1, 1);
     private static readonly object InitLock = new object();
-
     private static readonly Random Random = new Random();
-
-    /// <summary>
-    /// Maximum retry attempts for connection operations.
-    /// </summary>
-    public static int MaxRetries { get; set; } = 4;
-
-    /// <summary>
-    /// Timeout in milliseconds to wait for IP change verification.
-    /// </summary>
-    public static int IpChangeTimeoutMs { get; set; } = 60000;
-
+    
     /// <summary>
     /// Initializes VPN settings based on the provided options.
     /// </summary>
